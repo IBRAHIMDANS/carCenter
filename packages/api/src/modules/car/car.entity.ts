@@ -17,6 +17,14 @@ export class Car extends  BaseEntity{
   @IsString()
   name: string;
 
+  @Column({ length: 255, name: 'brand', nullable: true })
+  @IsString()
+  brand: string;
+
+  @Column({ length: 255, name: 'registration', nullable: true })
+  @IsString()
+  registration: string;
+
   @Column({ length: 255, name: 'color', nullable: true })
   @IsString()
   color: string;
@@ -25,9 +33,10 @@ export class Car extends  BaseEntity{
   @IsString()
   state: string;
 
-  @Column({ type: 'simple-array', name: 'activity_domain', nullable: true })
+  @Column({ length: 255, name: 'userId', nullable: true })
   @IsString()
-  activityDomain: string[];
+  userId: string;
+
 
   @Exclude()
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
