@@ -1,0 +1,29 @@
+{
+  "name": "car-center",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "tests": "lerna run test --stream",
+    "pretty-quick": "lerna run pretty-quick",
+    "lint": "lerna run lint",
+    "lintfix": "lerna run lintfix",
+    "dev-api": "lerna run dev --scope api --stream",
+    "dev-app": "lerna run start --scope app --stream --npm-client=yarn",
+    "build": "lerna run build"
+  },
+  "dependencies": {
+    "pm2": "^4.2.3"
+  },
+  "devDependencies": {
+    "lerna": "^3.22.1",
+    "tspath": "^1.3.7",
+    "typescript": "^3.8.3",
+    "husky": "^4.2.5"
+  },
+  "engines": {
+    "node": ">=12.7.x",
+    "yarn": ">=1.19.x"
+  }
+}
