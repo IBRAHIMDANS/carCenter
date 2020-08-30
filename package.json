@@ -9,7 +9,7 @@
     "pretty-quick": "lerna run pretty-quick",
     "lint": "lerna run lint",
     "lintfix": "lerna run lintfix",
-    "dev-api": "lerna run dev --scope api --stream",
+    "dev-api": "lerna run start:dev --scope api --stream",
     "dev-app": "lerna run start --scope app --stream --npm-client=yarn",
     "build": "lerna run build"
   },
