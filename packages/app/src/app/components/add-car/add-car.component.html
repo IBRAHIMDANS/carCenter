@@ -1,23 +1,23 @@
 <div class="app-add-car">
-  <form class="add-card-form" [formGroup]="carForm" (submit)="registerCar()">
+  <form class="add-card-form" (submit)="registerCar($event)">
     <div>
       <mat-card-title class="app-connexion-title"> Ajouter une voiture</mat-card-title>
     </div>
     <mat-form-field appearance="outline">
       <mat-label>Nom de la voiture</mat-label>
-      <input  formControlName="name" matInput name="name" placeholder="name" required/>
+      <input matInput [formControl]="carForm.controls.name" name="name" placeholder="name" required/>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Marque</mat-label>
-      <input   formControlName="brand"  matInput name="name" placeholder="name" required/>
+      <input [formControl]="carForm.controls.brand" matInput name="name" placeholder="name" required/>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Immatriculation</mat-label>
-      <input  formControlName="registration"  matInput name="name" placeholder="name" required/>
+      <input [formControl]="carForm.controls.registration" matInput name="name" placeholder="name" required/>
     </mat-form-field>
-    <mat-form-field  appearance="outline">
+    <mat-form-field appearance="outline">
       <mat-label>Date d'achat</mat-label>
-      <input matInput [matDatepicker]="picker"  formControlName="purchaseDate">
+      <input matInput [matDatepicker]="picker" [formControl]="carForm.controls.purchaseDate">
       <mat-datepicker-toggle matSuffix [for]="picker">
         <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
       </mat-datepicker-toggle>
@@ -25,14 +25,14 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Couleur</mat-label>
-      <input  formControlName="color"  matInput name="name" placeholder="name" required/>
+      <input [formControl]="carForm.controls.color" matInput name="name" placeholder="name" required/>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Etat</mat-label>
-      <input  formControlName="state"  matInput name="name" placeholder="name" required/>
+      <input [formControl]="carForm.controls.state" matInput name="name" placeholder="name" required/>
     </mat-form-field>
     <div class="btn-login">
-      <button class="app-connexion-btn" color="accent" mat-raised-button>
+      <button class="app-connexion-btn" color="accent" [disabled]="carForm.invalid" mat-raised-button>
         Save
       </button>
     </div>

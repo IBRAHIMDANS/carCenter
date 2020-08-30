@@ -5,4 +5,5 @@ export interface Car {
   purchaseDate: string;
   color: string;
   state: string;
+  userId?: string
 }
