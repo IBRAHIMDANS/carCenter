@@ -6,6 +6,7 @@ export default interface CarInterface {
   color: string;
   state: string;
   userId: string;
+  purchaseDate: string
   createdAt?: Date;
   updatedAt?: Date;
 }

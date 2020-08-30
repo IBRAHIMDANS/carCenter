@@ -37,6 +37,10 @@ export class Car extends  BaseEntity{
   @IsString()
   userId: string;
 
+  @Column({ length: 255, name: 'purchaseDate', nullable: true })
+  @IsString()
+  purchaseDate: string;
+
 
   @Exclude()
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })

@@ -26,7 +26,7 @@ export class CarService {
   }
 
   public async create(payload: CarInterface): Promise<CarInterface> {
-    return await this.carRepository.save(payload);
+    return await this.carRepository.save(payload)
   }
   public async update(id, payload: CarInterface): Promise<unknown> {
     return this.carRepository

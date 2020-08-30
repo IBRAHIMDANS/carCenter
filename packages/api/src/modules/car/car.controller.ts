@@ -31,7 +31,10 @@ export class CarController {
   @ApiResponse({ status: 400, description: 'Bad Request' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   postCarByUserId(@Body() payload: CarInterface): Promise<CarInterface> {
-    return this.carService.create(payload);
+    return this.carService.create(payload).then(r => {
+      console.log('ok')
+      return  r;
+    }).catch(e => e);
 
   }
 

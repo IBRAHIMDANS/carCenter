@@ -1,0 +1,83 @@
+<form class="add-card-form">
+  <div>
+    <mat-card-title
+      class="app-connexion-title"> {{data.title !== 'Add' ? data.title !== 'Edit' ? 'Supprimer une voiture' : 'Modifier une voiture' : 'Ajouter une voiture'  }} </mat-card-title>
+  </div>
+  <span *ngIf="data.title !== 'Delete' ; else deleteBlock">
+    <mat-form-field appearance="outline">
+      <mat-label>Nom de la voiture</mat-label>
+      <input matInput [formControl]="carForm.controls.name" name="name" placeholder="name" required/>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+    <input type="text"
+           name="brand"
+           placeholder="marque"
+           aria-label="Marque"
+           matInput
+           required
+           (ngModelChange)="_filter()"
+           [formControl]="carForm.controls.brand"
+           [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions  " [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Immatriculation</mat-label>
+      <input [formControl]="carForm.controls.registration" matInput name="name" placeholder="name" required/>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Date d'achat</mat-label>
+      <input matInput [matDatepicker]="picker" [formControl]="carForm.controls.purchaseDate">
+      <mat-datepicker-toggle matSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Couleur</mat-label>
+      <input [formControl]="carForm.controls.color" matInput name="color" placeholder="couleur" required/>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Couleur</mat-label>
+      <mat-select [formControl]="carForm.controls.color">
+        <mat-option *ngFor="let color of arrayColor" [value]="color">
+          {{color.name}} <span [ngStyle]="{'background-color': color.value}"> &nbsp; &nbsp;&nbsp;</span>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Etat de la voiture</mat-label>
+      <mat-select [formControl]="carForm.controls.state">
+        <mat-option value="comme neuf">comme neuf</mat-option>
+        <mat-option value="bon">Bon</mat-option>
+        <mat-option value="acceptable">Acceptable</mat-option>
+        <mat-option value="mauvais">Mauvais</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </span>
+  <ng-template #deleteBlock>
+    <mat-card-subtitle class="app-info">
+      Voulez- vous supprimer cette voiture ?
+    </mat-card-subtitle>
+  </ng-template>
+  <div class="btn-login">
+    <button class="app-connexion-btn" color="primary" (click)="cancel()" mat-raised-button>
+      cancel
+    </button>
+    <button *ngIf="data.title !== 'Delete'" class="app-connexion-btn" type="submit" color="accent"
+            (click)="manageCar($event)"
+            [disabled]="carForm.invalid" mat-raised-button>
+
+      Enregistrer
+    </button>
+    <button *ngIf="data.title === 'Delete'" class="app-connexion-btn" type="submit" color="accent"
+            (click)="manageCar($event)"
+            mat-raised-button>
+      Oui
+    </button>
+  </div>
+</form>

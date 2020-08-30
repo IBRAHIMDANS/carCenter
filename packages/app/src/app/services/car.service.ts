@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { Car } from '../models/Car';
 
@@ -15,7 +15,6 @@ export class CarService {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        responseType: 'text',
       }),
     };
   }
@@ -27,7 +26,6 @@ export class CarService {
   }
 
   public save(car: Car): Observable<Car> {
-    console.log(car);
     return this.httpClient.post<Car>(`${environment.api}/car`, {
       name: car.name,
       color: car.color,
@@ -36,6 +34,36 @@ export class CarService {
       purchaseDate: car.purchaseDate,
       brand: car.brand,
       userId: localStorage.getItem('userId')
-    }).pipe(tap(e => console.log(e)), map(res => res), catchError(err => throwError(err)));
+    }, {
+      headers: this.httpOptions,
+    }).pipe(map(res => res), catchError(err => throwError(err)));
+  }
+
+  public update(car: Car): Observable<Car> {
+    return this.httpClient.patch<Car>(`${environment.api}/car/${car.id}`, {
+      name: car.name,
+      color: car.color,
+      state: car.state,
+      registration: car.registration,
+      purchaseDate: car.purchaseDate,
+      brand: car.brand,
+      userId: localStorage.getItem('userId')
+    }, {
+      headers: this.httpOptions,
+    })
+      .pipe(
+        map(res => res),
+        catchError(err => throwError(err))
+      );
+  }
+
+  delete(car: Car): Observable<Car> {
+    return this.httpClient
+      .delete<Car>(`${environment.api}/car/${car.id}`,
+        { headers: this.httpOptions })
+      .pipe(
+        map(res => res),
+        catchError(err => throwError(err))
+      );
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AddCarComponent } from '../../components/add-car/add-car.component';
+import { ManageCarComponent } from '../../components/manage-car/manage-car.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { CarService } from '../../services/car.service';
@@ -16,22 +16,5 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.carService.getCarUser().subscribe((res: Car[]) => {
-      console.log(res);
-    }, error => {
-      console.log(error);
-    });
-  }
-
-  AddCar(): Subscription {
-    return this.dialog.open(AddCarComponent, {
-      autoFocus: true,
-      data: {
-        title: 'Add',
-      }
-    }).afterClosed().subscribe(res => {
-      console.log(res);
-    });
-
   }
 }
