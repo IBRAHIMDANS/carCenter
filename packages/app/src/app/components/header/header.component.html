@@ -1,4 +1,5 @@
-<mat-toolbar color="primary" class="app-connect">
+<mat-toolbar class="app-connect" color="primary">
   <span (click)="goToHome()">MY CAR CENTER</span>
-  <span class="app-userId">Méteo {{userId}}</span>
+  <span class="app-userId">Méteo {{meteo?.current.temp | number:'1.0-0'}}°C </span>
 </mat-toolbar>
+

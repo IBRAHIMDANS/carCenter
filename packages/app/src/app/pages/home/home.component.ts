@@ -1,9 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ManageCarComponent } from '../../components/manage-car/manage-car.component';
-import { MatDialog } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
-import { CarService } from '../../services/car.service';
-import { Car } from '../../models/Car';
 
 @Component({
   selector: 'app-home',
@@ -11,8 +6,10 @@ import { Car } from '../../models/Car';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  location;
 
-  constructor(public dialog: MatDialog, public carService: CarService) {
+  constructor() {
+
   }
 
   ngOnInit(): void {

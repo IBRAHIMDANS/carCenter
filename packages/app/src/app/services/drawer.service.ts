@@ -6,7 +6,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class DrawerService {
   private drawerOpen$ = new BehaviorSubject(false);
-  constructor() { }
+
+  constructor() {
+  }
+
   public whenDrawerChanges(): Observable<boolean> {
     return this.drawerOpen$.asObservable();
   }

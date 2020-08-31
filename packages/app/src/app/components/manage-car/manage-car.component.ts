@@ -32,7 +32,6 @@ export class ManageCarComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private carService: CarService, public dialogRef: MatDialogRef<ManageCarComponent>,
               @Inject(MAT_DIALOG_DATA) public data) {
-    console.log(this.options);
   }
 
   manageCar(e: Event): void {
@@ -86,33 +85,30 @@ export class ManageCarComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.data.title === 'Edit') {
+      console.log(this.data.data.color);
       this.carForm = this.fb.group({
         name: new FormControl((this.data.data as Car).name, Validators.compose([Validators.required])),
         brand: new FormControl((this.data.data as Car).brand, Validators.compose([Validators.required])),
         registration: new FormControl((this.data.data as Car).registration, Validators.compose([Validators.required])),
         purchaseDate: new FormControl((this.data.data as Car).purchaseDate, Validators.compose([Validators.required])),
-        color: new FormControl((this.data.data as Car).color, Validators.compose([Validators.required])),
+        color: new FormControl((JSON.parse((this.data.data.color))), Validators.compose([Validators.required])),
         state: new FormControl((this.data.data as Car).state, Validators.compose([Validators.required])),
       });
     }
-    this.filteredOptions = this.carForm.controls.brands?.valueChanges
+    this.filteredOptions = this.carForm.controls.brand.valueChanges
       .pipe(
         startWith(''),
         map(value => this._filter(value))
       );
+    console.log(this.carForm.getRawValue());
   }
 
   cancel(): void {
     return this.dialogRef.close(null);
   }
 
-  private _filter(value): any {
-    console.log(this.carForm.controls.brand.value);
+  private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => {
-      console.log(option);
-      return option.toLowerCase().includes(filterValue);
-    });
+    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 }
