@@ -11,7 +11,7 @@
     "lintfix": "lerna run lintfix",
     "dev-api": "lerna run start:dev --scope api --stream",
     "dev-app": "lerna run start --scope app --stream --npm-client=yarn",
-    "init-repo": "lerna bootstrap",
+    "bootstrap": "npx lerna bootstrap",
     "build": "lerna run build"
   },
   "dependencies": {
